@@ -606,12 +606,14 @@ class Session(SessionRedirectMixin):
             content. Defaults to ``False``.
         :param verify: (optional) Either a boolean, in which case it controls whether we verify
             the server's TLS certificate, or a string, in which case it must be a path
-            to a CA bundle to use. Defaults to ``True``. When set to
-            ``False``, requests will accept any TLS certificate presented by
-            the server, and will ignore hostname mismatches and/or expired
-            certificates, which will make your application vulnerable to
-            man-in-the-middle (MitM) attacks. Setting verify to ``False``
-            may be useful during local development or testing.
+            to a CA bundle to use. Defaults to ``None`` (use the session's verify setting).
+            When set to ``True``, requests requires certificate verification using the
+            default CA bundle. When set to ``False``, requests will accept any TLS
+            certificate presented by the server, and will ignore hostname mismatches
+            and/or expired certificates, which will make your application vulnerable to
+            man-in-the-middle (MitM) attacks. Setting verify to ``False`` may be useful
+            during local development or testing. When set to a string path, it must point
+            to a CA bundle file or directory to be used for certificate verification.
         :param cert: (optional) if String, path to ssl client cert file (.pem).
             If Tuple, ('cert', 'key') pair.
         :rtype: requests.Response
