@@ -862,11 +862,7 @@ class Session(SessionRedirectMixin):
         # Merge all the kwargs.
         proxies = merge_setting(proxies, self.proxies)
         stream = merge_setting(stream, self.stream)
-        # When verify is explicitly True, use default bundle (don't merge with session verify)
-        if verify is True:
-            verify = True
-        else:
-            verify = merge_setting(verify, self.verify)
+        verify = merge_setting(verify, self.verify)
         cert = merge_setting(cert, self.cert)
 
         return {"proxies": proxies, "stream": stream, "verify": verify, "cert": cert}
