@@ -322,7 +322,7 @@ class HTTPAdapter(BaseAdapter):
             cert_loc = None
 
             # Allow self-specified cert location.
-            if verify is not True:
+            if isinstance(verify, str):
                 cert_loc = verify
 
             if not cert_loc:
