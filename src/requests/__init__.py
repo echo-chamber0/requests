@@ -51,10 +51,11 @@ try:
 except ImportError:
     charset_normalizer_version = None
 
-try:
-    from chardet import __version__ as chardet_version  # type: ignore[import-not-found]
-except ImportError:
-    chardet_version = None
+# chardet is an optional dependency that should only be used if the
+# use-chardet-on-py3 extra is installed. We no longer attempt to import it
+# opportunistically, to avoid version warnings when chardet is installed
+# by other packages without respecting requests' version constraints.
+chardet_version = None
 
 
 def check_compatibility(

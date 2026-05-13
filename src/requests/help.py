@@ -18,10 +18,10 @@ try:
 except ImportError:
     charset_normalizer = None
 
-try:
-    import chardet  # type: ignore[import-not-found]
-except ImportError:
-    chardet = None
+# chardet is an optional dependency that should only be used if the
+# use-chardet-on-py3 extra is installed. We no longer attempt to import it
+# opportunistically.
+chardet = None
 
 try:
     from urllib3.contrib import pyopenssl
