@@ -862,7 +862,9 @@ class Session(SessionRedirectMixin):
         # Merge all the kwargs.
         proxies = merge_setting(proxies, self.proxies)
         stream = merge_setting(stream, self.stream)
-        verify = merge_setting(verify, self.verify)
+        # Only merge verify when explicitly None to preserve session verify setting
+        if verify is None:
+            verify = self.verify
         cert = merge_setting(cert, self.cert)
 
         return {"proxies": proxies, "stream": stream, "verify": verify, "cert": cert}
