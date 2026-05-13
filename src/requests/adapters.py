@@ -322,10 +322,9 @@ class HTTPAdapter(BaseAdapter):
             cert_loc = None
 
             # Allow self-specified cert location.
-            if verify is not True:
+            if isinstance(verify, str):
                 cert_loc = verify
-
-            if not cert_loc:
+            elif verify is True:
                 cert_loc = DEFAULT_CA_BUNDLE_PATH
 
             if not cert_loc or not os.path.exists(cert_loc):
