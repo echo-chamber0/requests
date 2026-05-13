@@ -852,11 +852,12 @@ class Session(SessionRedirectMixin):
 
             # Look for requests environment configuration
             # and be compatible with cURL.
-            if verify is True or verify is None:
+            # Only apply environment variables when verify is not explicitly set (None)
+            # When verify is True, it should remain True (not be replaced by env vars)
+            if verify is None:
                 verify = (
                     os.environ.get("REQUESTS_CA_BUNDLE")
                     or os.environ.get("CURL_CA_BUNDLE")
-                    or verify
                 )
 
         # Merge all the kwargs.
